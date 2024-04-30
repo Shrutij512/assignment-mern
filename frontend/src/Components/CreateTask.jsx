@@ -17,7 +17,7 @@ const CreateTask = () => {
         const token = localStorage.getItem("token");
 
         if (token) {
-            fetch(`http://localhost:8080/tasks/create`, {
+            fetch(`https://assignment-mern-wu1u.vercel.app/tasks/create`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",

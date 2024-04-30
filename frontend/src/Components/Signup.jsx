@@ -29,7 +29,7 @@ const Signup = () => {
             name, email, password
         })
 
-        fetch(`http://localhost:8080/signup`, {
+        fetch(`https://assignment-mern-wu1u.vercel.app/signup`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",

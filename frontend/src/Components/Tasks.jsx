@@ -68,7 +68,7 @@ const Tasks = () => {
 
             const token = localStorage.getItem("token");
 
-            const res = await fetch(`http://localhost:8080/tasks/${id}`, {
+            const res = await fetch(`https://assignment-mern-wu1u.vercel.app/tasks/${id}`, {
                 method: "DELETE",
                 headers: {
                     "Content-Type": "application/json",
