@@ -23,7 +23,7 @@ function NavComp() {
                         <Nav.Link href="/tasks">All Tasks</Nav.Link>
                         <Nav.Link href="/create">Create</Nav.Link>
                         {/* <Nav.Link href="/profile">Profile</Nav.Link> */}
-                        <Nav.Link href="/signup">Signup</Nav.Link>
+                        {token ? "" : <Nav.Link href="/signup">Signup</Nav.Link>}
 
                         <NavDropdown title="Profile" id="navbarScrollingDropdown">
                             {/* <NavDropdown.Item href="#action3"></NavDropdown.Item> */}

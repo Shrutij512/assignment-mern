@@ -30,12 +30,12 @@ router.patch("/:taskID", async(req, res) => {
     try {
         const task = await TaskModel.findOne({ _id: taskId });
 
-        // if (task.user_id === user_id) {
-        await TaskModel.findByIdAndUpdate(taskId, payload);
-        res.send("Task Updated");
-        // } else {
-        // res.status(404).send({ message: "Task not found" });
-        // }
+        if (task.user_id === user_id) {
+            await TaskModel.findByIdAndUpdate(taskId, payload);
+            res.send("Task Updated");
+        } else {
+            res.status(404).send({ message: "Task not found" });
+        }
     } catch (error) {
         console.error(error);
         res.status(500).send("Internal Server Error");
@@ -44,19 +44,25 @@ router.patch("/:taskID", async(req, res) => {
 
 router.delete("/:taskID", async(req, res) => {
     const taskId = req.params.taskID;
-
+    const user_id = req.userId;
     try {
         const task = await TaskModel.findOne({ _id: taskId });
 
         if (task) {
-            await TaskModel.findByIdAndDelete(taskId);
-            res.send("Task Deleted");
+            if (task.user_id === user_id) {
+                await TaskModel.findByIdAndDelete(taskId);
+                res.send({ message: "Task Deleted" });
+            } else {
+                res.send({ message: "Task not found" })
+                    // res.status(404).send({ message: "Task not found" });
+            }
+
         } else {
             res.status(404).send("Task not found");
         }
     } catch (error) {
         console.error(error);
-        res.status(500).send("Internal Server Error");
+        res.status(500).send("Internal Server Error", error);
     }
 });
 

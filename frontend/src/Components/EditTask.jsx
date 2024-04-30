@@ -24,7 +24,10 @@ const EditTask = () => {
                 "Authorization": `Bearer ${token}`
             },
         })
-            .then((res) => res.json())
+            .then((res) => {
+                console.log(res)
+                return res.json()
+            })
             .then((res) => {
                 console.log(res.Task);
                 setTaskData(res.Task);
@@ -46,7 +49,10 @@ const EditTask = () => {
             },
             body: payload
         })
-            .then((res) => res.json())
+            .then((res) => {
+                console.log(res)
+                return res.json()
+            })
             .then((res) => {
                 console.log(res)
                 setTitle(res.Task.title || '');

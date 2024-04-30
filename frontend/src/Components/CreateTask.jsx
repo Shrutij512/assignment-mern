@@ -7,7 +7,7 @@ const CreateTask = () => {
     const [description, setDescription] = useState("");
     const [status, setStatus] = useState("");
 
-    const token = localStorage.getItem("token") || "";
+    // const token = localStorage.getItem("token") || "";
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -31,8 +31,8 @@ const CreateTask = () => {
                     setTitle(res.Task.title || '');
                     setDescription(res.Task.description || '');
                     setStatus(res.Task.status || '');
-
                 })
+            alert("Task created !!")
             window.location.href = "/tasks";
 
         } else {

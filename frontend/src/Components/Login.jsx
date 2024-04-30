@@ -64,7 +64,7 @@ const Login = () => {
                                             required
                                         />
                                     </Form.Group>
-                                    <div style={{ "textAlign": "center", "marginTop": "10px" }}> <text>Don't have an account ? </text>
+                                    <div style={{ "textAlign": "center", "marginTop": "10px" }}> <p>Don't have an account ? </p>
                                         <Link to={"/signup"}>Sign up</Link></div>
                                     <br />
                                     <Button variant="primary" type="submit">

@@ -37,7 +37,10 @@ const Signup = () => {
             body: user,
         })
             .then((res) => res.json())
-            .then((res) => console.log(res))
+            .then((res) => {
+                console.log(res)
+                window.location.href = "/login"
+            })
     }
 
     return (
@@ -92,7 +95,7 @@ const Signup = () => {
                                         required
                                     />
                                 </Form.Group>
-                                <div style={{ "textAlign": "center", "marginTop": "10px" }}> <text>Already an user ? </text>
+                                <div style={{ "textAlign": "center", "marginTop": "10px" }}> <p>Already an user ? </p>
                                     <Link to={"/login"}>Login</Link></div>
                                 <br />
                                 <Button variant="primary" type="submit">
