@@ -14,24 +14,53 @@ const EditTask = () => {
         getInputData();
     }, [])
 
-    const getInputData = async () => {
-        const token = localStorage.getItem("token");
+    const fetchData = async () => {
+        try {
+            const token = localStorage.getItem("token");
+            const response = await fetch("http://localhost:8080/tasks", {
+                method: "GET",
+                headers: {
+                    "Content-Type": "application/json",
+                    "Authorization": `Bearer ${token}`
+                },
+            });
 
-        await fetch(`https://assignment-mern-wu1u.vercel.app/tasks/${id}`, {
-            method: "GET",
-            headers: {
-                "Content-Type": "application/json",
-                "Authorization": `Bearer ${token}`
-            },
-        })
-            .then((res) => {
-                console.log(res)
-                return res.json()
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+
+            const data = await response.json();
+            // console.log(data);
+            if (data.message === "Invalid token") {
+                setTaskData([]);
+            } else {
+                setTaskData(data.Tasks);
+            }
+        } catch (error) {
+            console.error('Error fetching tasks:', error);
+        }
+    }
+
+    const getInputData = async () => {
+        try {
+            const token = localStorage.getItem("token");
+
+            const res = await fetch(`https://assignment-mern-wu1u.vercel.app/tasks/${id}`, {
+                method: "GET",
+                headers: {
+                    "Content-Type": "application/json",
+                    "Authorization": `Bearer ${token}`
+                },
             })
-            .then((res) => {
-                console.log(res.Task);
-                setTaskData(res.Task);
-            })
+            const data = await res.json()
+
+            // setTaskData(res.Task);
+            setTitle(data.Task.title || '');
+            setDescription(data.Task.description || '');
+            setStatus(data.Task.status || '');
+        } catch (error) {
+            console.error('Error updating task:', error);
+        }
     }
 
     const handleSubmit = (e) => {
@@ -58,6 +87,7 @@ const EditTask = () => {
                 setTitle(res.Task.title || '');
                 setDescription(res.Task.description || '');
                 setStatus(res.Task.status || '');
+                fetchData()
 
             })
         window.location.href = "/tasks";
